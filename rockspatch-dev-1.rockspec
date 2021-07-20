@@ -1,5 +1,5 @@
 rockspec_format = "3.0"
-package = "rockspatch"
+package = "rocks-patch"
 version = "dev-1"
 source = {
 	url = "git://github.com/Deepak123bharat/rocks-patch",
