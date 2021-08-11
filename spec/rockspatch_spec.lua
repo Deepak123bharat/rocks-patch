@@ -1,5 +1,6 @@
 local patch = require("rocks.patch")
 local fs = require("rocks.fs")
+local sysdetect = require("rocks.sysdetect")
 
 local lao =
 [[The Nameless is the origin of Heaven and Earth;
@@ -164,8 +165,10 @@ describe("Luarocks patch test #unit", function()
    end
 
    setup(function()
-      fs.init({"linux","unix"})
+      local sys, arc = sysdetect.detect()
+      fs.init({sys, "unix"})
    end)
+   
    describe("patch.read_patch", function()
       it("returns a table with the patch file info and the result of parsing the file", function()
          local t, result
