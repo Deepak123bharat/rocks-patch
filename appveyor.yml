@@ -38,7 +38,7 @@ test_script:
 - echo "Type check..."
 - tl check src/rocks/patch.d.tl
 - echo "Testing..."
-- lua spec/rockspatch_spec.lua
+- luarocks test 
 
 after_test:
 # @todo
