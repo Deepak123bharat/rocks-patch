@@ -1,4 +1,5 @@
 local patch = require("rocks.patch")
+local fs = require("rocks.fs")
 
 local lao =
 [[The Nameless is the origin of Heaven and Earth;
@@ -153,6 +154,18 @@ describe("Luarocks patch test #unit", function()
          end
    end
 
+   local function get_tmp_path()
+      local path = os.tmpname()
+      if package.config:sub(1,1) == "\\" and not path:find(":") then
+         path = os.getenv("TEMP") .. path
+      end
+      os.remove(path)
+      return path
+   end
+
+   setup(function()
+      fs.init({"linux","unix"})
+   end)
    describe("patch.read_patch", function()
       it("returns a table with the patch file info and the result of parsing the file", function()
          local t, result
