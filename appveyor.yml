@@ -28,7 +28,7 @@ before_build:
 - echo "Installing external deps"
 
 build_script:
-- luarocks make
+- luarocks make --dev
 
 before_test:
 - luarocks install rocks-patch --dev
