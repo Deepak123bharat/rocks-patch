@@ -166,7 +166,11 @@ describe("Luarocks patch test #unit", function()
 
    setup(function()
       local sys, arc = sysdetect.detect()
-      fs.init({sys, "unix"})
+      if(sys == "linux") then
+         fs.init({sys, "unix"})
+      else
+         fs.init({sys})
+      end
    end)
    
    describe("patch.read_patch", function()
