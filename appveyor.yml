@@ -40,17 +40,13 @@ environment:
     TARGET: "vs_64"
     OPENSSL_LIBDIR: "c:\\OpenSSL-v111-Win32\\lib"
 
-# Abuse this section so we can have a matrix with different Compiler versions
-configuration:
-  - mingw
-  - vs_64
-
 install:
   - set PATH=%CD%\env\bin;C:\Python27\Scripts;C:\MinGW\bin;%PATH%
   - pip install hererocks
   - hererocks env --%LUA% --target %TARGET% --luarocks latest
   - luarocks config variables.OPENSSL_INCDIR c:\OpenSSL-v111-Win32\include
   - luarocks config variables.OPENSSL_LIBDIR %OPENSSL_LIBDIR%
+  - luarocks install rocks-sysdetect --dev
 
 before_build:
 # @todo
@@ -60,7 +56,6 @@ build_script:
 - luarocks make --dev
 
 before_test:
-- luarocks install rocks-patch --dev
 - luarocks install tl
 
 test_script:
